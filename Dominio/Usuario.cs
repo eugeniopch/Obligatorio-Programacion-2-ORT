@@ -14,6 +14,11 @@ namespace Dominio
         protected string _email;
         protected string _password;
 
+        public int id
+        {
+            get { return _id; } 
+        }
+
         public Usuario(string email, string password)
         {
             _id = s_ultimoId++;
@@ -25,6 +30,12 @@ namespace Dominio
         {
             if (string.IsNullOrEmpty(_email)) throw new Exception("El mail no puede estar vacío");
             if (string.IsNullOrEmpty(_password)) throw new Exception("La contraseña no puede estar vacía");
+        }
+
+        public override bool Equals(object obj)
+        {
+            Usuario u = obj as Usuario;
+            return u != null && u._email == this._email;
         }
     }
 }

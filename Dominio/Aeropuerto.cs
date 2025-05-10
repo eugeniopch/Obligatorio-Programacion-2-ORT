@@ -45,5 +45,11 @@ namespace Dominio
         {
             return $"Código IATA : {_codigoIATA} - Ciudad : {_ciudad} - Costo de operación : {_costoDeOperacion} - Costo de tasas : {_costoTasas}";
         }
+
+        public override bool Equals(object obj)
+        {
+            Aeropuerto a = obj as Aeropuerto;
+            return a != null && a._codigoIATA == this._codigoIATA;
+        }
     }
 }

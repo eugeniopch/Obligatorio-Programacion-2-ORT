@@ -13,18 +13,18 @@ namespace Dominio
         private static int s_ultimoId = 1;
         private Vuelo _vuelo;
         private DateTime _fechaDelVuelo;
-        private Cliente _cliente;
+        private Usuario _cliente;
         private Equipaje _equipaje;
         private double _precio;
 
-        public Pasaje(Vuelo vuelo, DateTime fechaDelVuelo, Cliente cliente, Equipaje equipaje, double precio)
+        public Pasaje(Vuelo vuelo, DateTime fechaDelVuelo, Usuario cliente, Equipaje equipaje, double precio)
         {
             _id = s_ultimoId++;
             _vuelo = vuelo;
             _fechaDelVuelo = fechaDelVuelo;
             _cliente = cliente;
             _equipaje = equipaje;
-            _precio = precio;
+            _precio = 0;
         }
 
         public void Validar()
@@ -33,6 +33,12 @@ namespace Dominio
             if (_cliente == null) throw new Exception("El cliente no puede ser nulo");
             if (_fechaDelVuelo == new DateTime()) throw new Exception("La fecha del vuelo no es válida");
             if (_precio < 0) throw new Exception("El precio no puede ser un valor menor a 0");
+        }
+
+        public override bool Equals(object obj)
+        {
+            Pasaje p = obj as Pasaje;
+            return p != null && p._id == this._id;
         }
 
         //Método para calcular el precio del pasaje

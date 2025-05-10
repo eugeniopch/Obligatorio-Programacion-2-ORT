@@ -1,4 +1,5 @@
-﻿using Dominio;
+﻿using System.Text.RegularExpressions;
+using Dominio;
 
 namespace Consola
 {
@@ -20,12 +21,15 @@ namespace Consola
                 switch (opcion)
                 {
                     case "1":
+                        ListadoDeClientes();
                         PresioneParaContinuar();
                         break;
                     case "2":
+                        VuelosCodigoAeropuerto();
                         PresioneParaContinuar();
                         break;
                     case "3":
+                        AltaClienteOcasional();
                         PresioneParaContinuar();
                         break;
                     case "4":
@@ -102,6 +106,68 @@ namespace Consola
             }
 
             return numero;
+        }
+
+        public static void ListadoDeClientes()
+        {
+            Console.Clear();
+            Console.WriteLine("**** LISTADO DE CLIENTES ****");
+            Console.WriteLine();
+
+            try
+            {
+                List<Usuario> listadoUsuarios = miSistema.Usuarios;
+                if (listadoUsuarios.Count == 0) throw new Exception("No hay clientes registrados en el sistema");
+
+                foreach (Usuario u in listadoUsuarios)
+                {
+                    if (u is Cliente)
+                    {
+                        Console.WriteLine(u);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MensajeError(ex.Message);
+            }
+        }
+
+        public static void VuelosCodigoAeropuerto()
+        {
+            Console.Clear();
+
+            string codAeropuerto = ObtenerPalabras("Ingrese el código del aeropuerto: ").ToUpper();
+
+            foreach(Vuelo v in miSistema.Vuelos) 
+            {
+                Ruta r = v.Ruta;
+                if (r.aeropuertoLlegada.codigo == codAeropuerto || r.aeropuertoSalida.codigo == codAeropuerto)
+                {
+                        Console.WriteLine(v);
+                }
+            }
+        }
+
+        public static void AltaClienteOcasional() 
+        {
+            string email = ObtenerPalabras("Ingrese el email del cliente: ");
+            string password = ObtenerPalabras("Ingrese el password del cliente: ");
+            string documento = ObtenerPalabras("Ingrese el documento del cliente: ");
+            string nombreCompleto = ObtenerPalabras("Ingrese el nombre completo del cliente: ");
+            string nacionalidad = ObtenerPalabras("Ingrese la nacionalidad del cliente: ");
+
+            try
+            {
+                ClienteOcasional co = new ClienteOcasional(email, password, documento, nombreCompleto, nacionalidad);
+                miSistema.CrearUsuario(co);
+                MensajeExito("El cliente ocasional fue creado exitosamente");
+            }
+            catch (Exception ex)
+            {
+                MensajeError(ex.Message);
+            }
+
         }
     }
 }

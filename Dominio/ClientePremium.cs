@@ -23,7 +23,7 @@ namespace Dominio
 
         public override string ToString() 
         {
-            return $"Nombre: {_nombreCompleto} - Email: {_email} - Nacionalidad: {_nacionalidad} - Puntos: {_puntos} - CLIENTE PREMIUM";
+            return $"id {_id} Nombre: {_nombreCompleto} - Email: {_email} - Nacionalidad: {_nacionalidad} - Puntos: {_puntos} - CLIENTE PREMIUM";
         }
 
         //Método para modificar los puntos del cliente premium

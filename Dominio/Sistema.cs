@@ -15,11 +15,29 @@ namespace Dominio
         private List<Ruta> _rutas = new List<Ruta>();
         private List<Aeropuerto> _aeropuertos = new List<Aeropuerto>();
 
+        public List<Usuario> Usuarios
+        {  
+            get { return _usuarios; } 
+        }
+
+        public List<Vuelo> Vuelos
+        {
+            get { return _vuelos; }
+        }
+
+        public List<Ruta> Rutas
+        {
+            get { return _rutas; }
+        }
+
         public Sistema()
         {
             PrecargarAeropuertos();
-            PrecargarRutas();
             PrecargarAviones();
+            PrecargarRutas();
+            PrecargarVuelos();
+            PrecargarUsuarios();
+            PrecargarPasajes();
         }
 
         public void PrecargarAeropuertos()
@@ -46,38 +64,38 @@ namespace Dominio
             CrearAeropuerto(new Aeropuerto("AKL", "Auckland", 13800, 4600));
         }
 
-        public void PrecargarRutas() 
+        public void PrecargarRutas()
         {
-            CrearRuta("JFK", "LHR", 5567);
-            CrearRuta("NRT", "SYD", 7824);
-            CrearRuta("CDG", "DXB", 5245);
-            CrearRuta("FRA", "GRU", 9795);
-            CrearRuta("LAX", "PEK", 10064);
-            CrearRuta("JNB", "DEL", 8012);
-            CrearRuta("MEX", "YYZ", 3260);
-            CrearRuta("AMS", "ICN", 8592);
-            CrearRuta("SCL", "BKK", 17550);
-            CrearRuta("CAI", "AKL", 16800);
-            CrearRuta("LHR", "CDG", 344);
-            CrearRuta("SYD", "DXB", 12038);
-            CrearRuta("PEK", "JNB", 11800);
-            CrearRuta("DEL", "MEX", 14500);
-            CrearRuta("YYZ", "AMS", 6000);
-            CrearRuta("ICN", "SCL", 19300);
-            CrearRuta("BKK", "CAI", 7380);
-            CrearRuta("AKL", "JFK", 14100);
-            CrearRuta("GRU", "LAX", 9900);
-            CrearRuta("DXB", "NRT", 7930);
-            CrearRuta("CDG", "FRA", 480);
-            CrearRuta("LHR", "AMS", 370);
-            CrearRuta("PEK", "BKK", 3300);
-            CrearRuta("MEX", "SCL", 6600);
-            CrearRuta("ICN", "SYD", 8300);
-            CrearRuta("AKL", "CAI", 16500);
-            CrearRuta("DEL", "YYZ", 11700);
-            CrearRuta("GRU", "CAI", 10400);
-            CrearRuta("JNB", "SCL", 9200);
-            CrearRuta("LAX", "JFK", 3974);
+            CrearRuta("JFK", "LHR", 5567);  
+            CrearRuta("NRT", "SYD", 7824);  
+            CrearRuta("CDG", "DXB", 5245);  
+            CrearRuta("FRA", "GRU", 9795);  
+            CrearRuta("LAX", "PEK", 10064); 
+            CrearRuta("JNB", "DEL", 8012);  
+            CrearRuta("MEX", "YYZ", 3260);  
+            CrearRuta("AMS", "ICN", 8592);  
+            CrearRuta("SCL", "BKK", 7380);  
+            CrearRuta("CAI", "AKL", 12800);  
+            CrearRuta("LHR", "CDG", 344);   
+            CrearRuta("SYD", "DXB", 12038); 
+            CrearRuta("PEK", "JNB", 11800); 
+            CrearRuta("DEL", "MEX", 11500);  
+            CrearRuta("YYZ", "AMS", 6000);  
+            CrearRuta("ICN", "SCL", 8200);   
+            CrearRuta("BKK", "CAI", 7380);  
+            CrearRuta("AKL", "JFK", 14100); 
+            CrearRuta("GRU", "LAX", 9900);  
+            CrearRuta("DXB", "NRT", 7930);  
+            CrearRuta("CDG", "FRA", 480);   
+            CrearRuta("LHR", "AMS", 370);   
+            CrearRuta("PEK", "BKK", 3300);  
+            CrearRuta("MEX", "SCL", 6600);  
+            CrearRuta("ICN", "SYD", 8300);  
+            CrearRuta("AKL", "CAI", 12800); 
+            CrearRuta("DEL", "YYZ", 11700); 
+            CrearRuta("GRU", "CAI", 10400); 
+            CrearRuta("JNB", "SCL", 9200);  
+            CrearRuta("LAX", "JFK", 3974);  
         }
 
         public void PrecargarAviones()
@@ -91,42 +109,94 @@ namespace Dominio
         public void PrecargarVuelos()
         {
             CrearVuelo("AA101", 1, 1, new List<DayOfWeek> { DayOfWeek.Monday, DayOfWeek.Thursday });
-            CrearVuelo("DL202", 2, 2, new List<DayOfWeek> { DayOfWeek.Tuesday, DayOfWeek.Friday });
-            CrearVuelo("UA303", 3, 3, new List<DayOfWeek> { DayOfWeek.Wednesday });
+            CrearVuelo("DL202", 4, 2, new List<DayOfWeek> { DayOfWeek.Tuesday, DayOfWeek.Friday });
+            CrearVuelo("UA303", 4, 3, new List<DayOfWeek> { DayOfWeek.Wednesday });
             CrearVuelo("AF404", 4, 4, new List<DayOfWeek> { DayOfWeek.Monday, DayOfWeek.Saturday });
-            CrearVuelo("LH505", 1, 5, new List<DayOfWeek> { DayOfWeek.Thursday });
-            CrearVuelo("BA606", 2, 6, new List<DayOfWeek> { DayOfWeek.Friday });
+            CrearVuelo("LH505", 4, 5, new List<DayOfWeek> { DayOfWeek.Thursday });
+            CrearVuelo("BA606", 4, 6, new List<DayOfWeek> { DayOfWeek.Friday });
             CrearVuelo("EK707", 3, 7, new List<DayOfWeek> { DayOfWeek.Sunday });
             CrearVuelo("QF808", 4, 8, new List<DayOfWeek> { DayOfWeek.Tuesday });
-            CrearVuelo("KL909", 1, 9, new List<DayOfWeek> { DayOfWeek.Saturday });
-            CrearVuelo("AI110", 2, 10, new List<DayOfWeek> { DayOfWeek.Wednesday, DayOfWeek.Sunday });
+            CrearVuelo("KL909", 4, 9, new List<DayOfWeek> { DayOfWeek.Saturday });
+            CrearVuelo("AI110", 4, 10, new List<DayOfWeek> { DayOfWeek.Wednesday, DayOfWeek.Sunday });
             CrearVuelo("TK121", 3, 11, new List<DayOfWeek> { DayOfWeek.Monday });
             CrearVuelo("AC132", 4, 12, new List<DayOfWeek> { DayOfWeek.Friday });
-            CrearVuelo("NZ143", 1, 13, new List<DayOfWeek> { DayOfWeek.Tuesday });
-            CrearVuelo("CX154", 2, 14, new List<DayOfWeek> { DayOfWeek.Saturday });
-            CrearVuelo("ET165", 3, 15, new List<DayOfWeek> { DayOfWeek.Monday });
+            CrearVuelo("NZ143", 4, 13, new List<DayOfWeek> { DayOfWeek.Tuesday });         
+            CrearVuelo("CX154", 4, 14, new List<DayOfWeek> { DayOfWeek.Saturday });        
+            CrearVuelo("ET165", 4, 15, new List<DayOfWeek> { DayOfWeek.Monday });          
             CrearVuelo("IB176", 4, 16, new List<DayOfWeek> { DayOfWeek.Wednesday });
-            CrearVuelo("AV187", 1, 17, new List<DayOfWeek> { DayOfWeek.Sunday });
-            CrearVuelo("LA198", 2, 18, new List<DayOfWeek> { DayOfWeek.Friday });
-            CrearVuelo("TP209", 3, 19, new List<DayOfWeek> { DayOfWeek.Monday });
+            CrearVuelo("AV187", 4, 17, new List<DayOfWeek> { DayOfWeek.Sunday });          
+            CrearVuelo("LA198", 4, 18, new List<DayOfWeek> { DayOfWeek.Friday });          
+            CrearVuelo("TP209", 4, 19, new List<DayOfWeek> { DayOfWeek.Monday });          
             CrearVuelo("SA210", 4, 20, new List<DayOfWeek> { DayOfWeek.Thursday });
             CrearVuelo("KE221", 1, 21, new List<DayOfWeek> { DayOfWeek.Wednesday });
             CrearVuelo("JL232", 2, 22, new List<DayOfWeek> { DayOfWeek.Tuesday });
-            CrearVuelo("SU243", 3, 23, new List<DayOfWeek> { DayOfWeek.Saturday });
+            CrearVuelo("SU243", 4, 23, new List<DayOfWeek> { DayOfWeek.Saturday });        
             CrearVuelo("AZ254", 4, 24, new List<DayOfWeek> { DayOfWeek.Sunday });
-            CrearVuelo("SK265", 1, 25, new List<DayOfWeek> { DayOfWeek.Monday });
-            CrearVuelo("OS276", 2, 26, new List<DayOfWeek> { DayOfWeek.Friday });
-            CrearVuelo("LO287", 3, 27, new List<DayOfWeek> { DayOfWeek.Wednesday });
+            CrearVuelo("SK265", 4, 25, new List<DayOfWeek> { DayOfWeek.Monday });          
+            CrearVuelo("OS276", 4, 26, new List<DayOfWeek> { DayOfWeek.Friday });          
+            CrearVuelo("LO287", 4, 27, new List<DayOfWeek> { DayOfWeek.Wednesday });       
             CrearVuelo("HU298", 4, 28, new List<DayOfWeek> { DayOfWeek.Sunday });
-            CrearVuelo("NH309", 1, 29, new List<DayOfWeek> { DayOfWeek.Tuesday });
-            CrearVuelo("BR310", 2, 30, new List<DayOfWeek> { DayOfWeek.Thursday });
+            CrearVuelo("NH309", 4, 29, new List<DayOfWeek> { DayOfWeek.Tuesday });
+            CrearVuelo("BR310", 4, 30, new List<DayOfWeek> { DayOfWeek.Thursday });        
         }
 
+
+        public void PrecargarUsuarios()
+        {
+            // Administradores
+            CrearUsuario(new Administrador("admin1@correo.com", "admin123", "Admin1"));
+            CrearUsuario(new Administrador("admin2@correo.com", "admin456", "Admin2"));
+
+            // Clientes Premium
+            CrearUsuario(new ClientePremium("premium1@correo.com", "clave123", "12345678", "Ana García", "Uruguaya", 100));
+            CrearUsuario(new ClientePremium("premium2@correo.com", "clave456", "23456789", "Luis Pérez", "Argentino", 200));
+            CrearUsuario(new ClientePremium("premium3@correo.com", "clave789", "34567890", "Lucía Torres", "Chilena", 150));
+            CrearUsuario(new ClientePremium("premium4@correo.com", "clave321", "45678901", "Carlos Ruiz", "Paraguayo", 300));
+            CrearUsuario(new ClientePremium("premium5@correo.com", "clave654", "56789012", "Valentina Díaz", "Uruguaya", 250));
+
+            // Clientes Ocasionales
+            CrearUsuario(new ClienteOcasional("ocasional1@correo.com", "pass111", "67890123", "Mateo Fernández", "Brasileño"));
+            CrearUsuario(new ClienteOcasional("ocasional2@correo.com", "pass222", "78901234", "Martina Gómez", "Uruguaya"));
+            CrearUsuario(new ClienteOcasional("ocasional3@correo.com", "pass333", "89012345", "Joaquín López", "Boliviano"));
+            CrearUsuario(new ClienteOcasional("ocasional4@correo.com", "pass444", "90123456", "Sofía Herrera", "Argentina"));
+            CrearUsuario(new ClienteOcasional("ocasional5@correo.com", "pass555", "01234567", "Emilia Costa", "Uruguaya"));
+        }
+
+        public void PrecargarPasajes()
+        {
+            CrearPasaje("AA101", 3, Equipaje.LIGHT, new DateTime(2025, 5, 19));    // Lunes
+            CrearPasaje("DL202", 4, Equipaje.CABINA, new DateTime(2025, 5, 20));   // Martes
+            CrearPasaje("UA303", 5, Equipaje.BODEGA, new DateTime(2025, 5, 21));   // Miércoles
+            CrearPasaje("AF404", 6, Equipaje.LIGHT, new DateTime(2025, 5, 24));    // Sábado
+            CrearPasaje("LH505", 7, Equipaje.CABINA, new DateTime(2025, 5, 22));   // Jueves
+            CrearPasaje("BA606", 8, Equipaje.BODEGA, new DateTime(2025, 5, 23));   // Viernes
+            CrearPasaje("EK707", 9, Equipaje.LIGHT, new DateTime(2025, 5, 18));    // Domingo
+            CrearPasaje("QF808", 10, Equipaje.CABINA, new DateTime(2025, 5, 27));  // Martes
+            CrearPasaje("KL909", 11, Equipaje.BODEGA, new DateTime(2025, 5, 24));  // Sábado
+            CrearPasaje("AI110", 12, Equipaje.LIGHT, new DateTime(2025, 5, 21));   // Miércoles
+            CrearPasaje("TK121", 3, Equipaje.CABINA, new DateTime(2025, 5, 19));   // Lunes
+            CrearPasaje("AC132", 4, Equipaje.BODEGA, new DateTime(2025, 5, 23));   // Viernes
+            CrearPasaje("NZ143", 5, Equipaje.LIGHT, new DateTime(2025, 5, 20));    // Martes
+            CrearPasaje("CX154", 6, Equipaje.CABINA, new DateTime(2025, 5, 24));   // Sábado
+            CrearPasaje("ET165", 7, Equipaje.BODEGA, new DateTime(2025, 5, 19));   // Lunes
+            CrearPasaje("IB176", 8, Equipaje.LIGHT, new DateTime(2025, 5, 21));    // Miércoles
+            CrearPasaje("AV187", 9, Equipaje.CABINA, new DateTime(2025, 5, 18));   // Domingo
+            CrearPasaje("LA198", 10, Equipaje.BODEGA, new DateTime(2025, 5, 23));  // Viernes
+            CrearPasaje("TP209", 11, Equipaje.LIGHT, new DateTime(2025, 5, 26));   // Lunes
+            CrearPasaje("SA210", 12, Equipaje.CABINA, new DateTime(2025, 5, 22));  // Jueves
+            CrearPasaje("KE221", 3, Equipaje.BODEGA, new DateTime(2025, 5, 21));   // Miércoles
+            CrearPasaje("JL232", 4, Equipaje.LIGHT, new DateTime(2025, 5, 20));    // Martes
+            CrearPasaje("SU243", 5, Equipaje.CABINA, new DateTime(2025, 5, 24));   // Sábado
+            CrearPasaje("AZ254", 6, Equipaje.BODEGA, new DateTime(2025, 5, 25));   // Domingo
+            CrearPasaje("SK265", 7, Equipaje.LIGHT, new DateTime(2025, 5, 26));    // Lunes
+
+        }
 
         public void CrearAeropuerto(Aeropuerto aeropuerto)
         {
             if (aeropuerto == null) throw new Exception("El aeropuerto no puede estar vacío");
             aeropuerto.Validar();
+            if (_aeropuertos.Contains(aeropuerto)) throw new Exception("Ya existe un aeropuerto con ese código IATA");
             _aeropuertos.Add(aeropuerto);
         }
 
@@ -136,6 +206,7 @@ namespace Dominio
             Aeropuerto aeropuertoLlegada = ObtenerAeropuertoPorId(codAeropuertoLlegada);
             Ruta ruta = new Ruta(aeropuertoSalida, aeropuertoLlegada, distancia);
             ruta.Validar();
+            if (_rutas.Contains(ruta)) throw new Exception("Ya existe una ruta con ese id");
             _rutas.Add(ruta);
         }
 
@@ -143,6 +214,7 @@ namespace Dominio
         {
             if (avion == null) throw new Exception("El avión no puede estar vacío");
             avion.Validar();
+            if (_aviones.Contains(avion)) throw new Exception("Ya existe un avión con ese id");
             _aviones.Add(avion);
         }
 
@@ -150,15 +222,41 @@ namespace Dominio
         {
             Avion avion = ObtenerAvionPorId(idAvion);
             Ruta ruta = ObtenerRutaPorId(idRuta);
+
+            if (avion == null) throw new Exception("Avión no encontrado");
+            if (ruta == null) throw new Exception("Ruta no encontrada");
+
             Vuelo vuelo = new Vuelo(numeroVuelo, avion, ruta, frecuencia);
             vuelo.AlcanceSuficiente();
+            vuelo.CalcularCostoPorAsiento();
             vuelo.Validar();
+
+            if (_vuelos.Contains(vuelo)) throw new Exception("Ya existe un vuelo con ese número de vuelo");
+
             _vuelos.Add(vuelo);
         }
 
-        public void CrearPasaje()
-        {
 
+        public void CrearUsuario(Usuario usuario)
+        {
+            if (usuario == null) throw new Exception("El usuario no puede ser null");
+            usuario.Validar();
+            if (_usuarios.Contains(usuario)) throw new Exception("Ya existe un usuario con ese email");
+            _usuarios.Add(usuario);
+        }
+
+        public void CrearPasaje(string codVuelo, int idCliente, Equipaje equipaje, DateTime fechaVuelo)
+        {
+            Vuelo vuelo = ObtenerVueloPorId(codVuelo);
+            Usuario usuario = ObtenerUsuarioPorId(idCliente);
+            
+            if (idCliente == 1 || idCliente == 2) throw new Exception("No se pueden crear pasajes con usuarios Administradores");
+            if (!vuelo.frecuencia.Contains(fechaVuelo.DayOfWeek)) throw new Exception("La fecha ingresada no coincide con los días disponibles para este vuelo");
+            
+            Pasaje pasaje = new Pasaje(vuelo, fechaVuelo, usuario, equipaje, 0);
+            
+            if (_pasajes.Contains(pasaje)) throw new Exception("Ya existe un pasaje con ese id");
+            _pasajes.Add(pasaje);
         }
 
         public Aeropuerto ObtenerAeropuertoPorId(string codAeropuerto)
@@ -195,7 +293,7 @@ namespace Dominio
         {
             Ruta ruta = null;
             int i = 0;
-            while (ruta == null && i < _aviones.Count)
+            while (ruta == null && i < _rutas.Count)
             {
                 if (_rutas[i].id == idRuta)
                 {
@@ -206,13 +304,43 @@ namespace Dominio
             return ruta;
         }
 
+        public Vuelo ObtenerVueloPorId(string codVuelo)
+        {
+            Vuelo vuelo = null;
+            int i = 0;
+            while (vuelo == null && i < _vuelos.Count)
+            {
+                if (_vuelos[i].numVuelo == codVuelo)
+                {
+                    vuelo = _vuelos[i];
+                }
+                i++;
+            }
+            return vuelo;
+        }
+
+        public Usuario ObtenerUsuarioPorId(int idUsuario)
+        {
+            Usuario usuario = null;
+            int i = 0;
+            while (usuario == null && i < _usuarios.Count)
+            {
+                if (_usuarios[i].id == idUsuario)
+                {
+                    usuario = _usuarios[i];
+                }
+                i++;
+            }
+            return usuario;
+        }
+
 
         //Método para mostrar los aeropuertos
         public void MostrarAeropuertos()
         {
             foreach (var aeropuerto in _aeropuertos)
             {
-                Console.WriteLine(aeropuerto); // Llama automáticamente a ToString()
+                Console.WriteLine(aeropuerto);
             }
         }
 

@@ -8,8 +8,8 @@ namespace Dominio
 {
     public enum Equipaje
     {
-        Light = 1,
-        Cabina = 2,
-        Bodega = 3
+        LIGHT = 1,
+        CABINA = 2,
+        BODEGA = 3
     }
 }

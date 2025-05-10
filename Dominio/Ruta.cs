@@ -12,7 +12,7 @@ namespace Dominio
         private int _id;
         private static int s_ultimoId = 1;
         private Aeropuerto _aeropuertoSalida;
-        private Aeropuerto _aeropuertoLllegada;
+        private Aeropuerto _aeropuertoLlegada;
         private int _distancia;
 
         public int distancia 
@@ -30,24 +30,30 @@ namespace Dominio
             get { return _aeropuertoSalida; }
         }
 
-        public Aeropuerto aeropuertoLllegada
+        public Aeropuerto aeropuertoLlegada
         {
-            get { return _aeropuertoLllegada; }
+            get { return _aeropuertoLlegada; }
         }
 
-        public Ruta(Aeropuerto aeropuertoSalida, Aeropuerto aeropuertoLllegada, int distancia)
+        public Ruta(Aeropuerto aeropuertoSalida, Aeropuerto aeropuertoLlegada, int distancia)
         {
             _id = s_ultimoId++;
             _aeropuertoSalida = aeropuertoSalida;
-            _aeropuertoLllegada = aeropuertoLllegada;
+            _aeropuertoLlegada = aeropuertoLlegada;
             _distancia = distancia;
         }
 
         public void Validar()
         {
             if (_aeropuertoSalida == null) throw new Exception("El aeropuerto de salida no puede ser nulo"); 
-            if (_aeropuertoLllegada == null) throw new Exception("El aeropuerto de llegada no puede ser nulo");
+            if (_aeropuertoLlegada == null) throw new Exception("El aeropuerto de llegada no puede ser nulo");
             if (_distancia < 0) throw new Exception("La distancia no puede ser menor a 0");
+        }
+
+        public override bool Equals(object obj)
+        {
+            Ruta r = obj as Ruta;
+            return r != null && r._id == this._id;
         }
     }
 }

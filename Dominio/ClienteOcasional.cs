@@ -10,20 +10,32 @@ namespace Dominio
     {
         private bool _esElegible;
 
-        public ClienteOcasional(string email, string password, string documento, string nombreCompleto, string nacionalidad, bool esElegible) : base(email, password, documento, nombreCompleto, nacionalidad)
-        {
-            _esElegible = esElegible;
-        }
+        public ClienteOcasional(string email, string password, string documento, string nombreCompleto, string nacionalidad) : base(email, password, documento, nombreCompleto, nacionalidad){}
 
         public override string ToString()
         {
-            return $"Nombre: {_nombreCompleto} - Email: {_email} - Nacionalidad: {_nacionalidad} - Es elegible: {_esElegible} - CLIENTE OCASIONAL";
+            return $"id {_id} Nombre: {_nombreCompleto} - Email: {_email} - Nacionalidad: {_nacionalidad} - Es elegible: {_esElegible} - CLIENTE OCASIONAL";
+        }
+
+        public override bool Equals(object obj)
+        {
+            ClienteOcasional c = obj as ClienteOcasional;
+            return c != null && c._email == this._email;
         }
 
         //Método para determinar elegibilidad del cliente
-        public void DeterminarElegibilidad() { }
+        Random random = new Random();
+        public void DeterminarElegibilidad()
+        {
+            _esElegible = random.Next(2) == 0;
+        }
+
 
         //Método para cambiar el estado de elegible
-        public void CambiarEstadoElegible() { }
+        public void CambiarEstadoElegible()
+        {
+            _esElegible = !_esElegible;
+        }
+
     }
 }
