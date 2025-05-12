@@ -33,11 +33,7 @@ namespace Consola
                         PresioneParaContinuar();
                         break;
                     case "4":
-                        PresioneParaContinuar();
-                        break;
-                    case "5":
-                        Console.Clear();
-                        miSistema.MostrarAeropuertos();
+                        ListarPublicacionesEntreFechas();
                         PresioneParaContinuar();
                         break;
                     case "0":
@@ -61,7 +57,6 @@ namespace Consola
             Console.WriteLine("2 - Obtener vuelos a partir de código de aeropuerto");
             Console.WriteLine("3 - Alta de cliente ocasional");
             Console.WriteLine("4 - Listado de pasajes entre dos fechas");
-            Console.WriteLine("5 - Listado de aeropuertos");
             Console.WriteLine("0 - Salir");
         }
 
@@ -92,20 +87,18 @@ namespace Consola
             return dato;
         }
 
-        static int ObtenerNumeros(string mensaje)
+        static DateTime PedirFecha(string mensaje)
         {
             bool exito = false;
-            int numero = 0;
-
+            DateTime fecha = new DateTime();
             while (!exito)
             {
-                Console.Write(mensaje);
-                exito = int.TryParse(Console.ReadLine(), out numero);
+                Console.Write(mensaje + " [DD/MM/YYYY]:");
+                exito = DateTime.TryParse(Console.ReadLine(), out fecha);
 
-                if (!exito) MensajeError("Ingrese un valor numérico");
+                if (!exito) MensajeError("ERROR: Debe ingresar una fecha en formato DD/MM/YYYY");
             }
-
-            return numero;
+            return fecha;
         }
 
         public static void ListadoDeClientes()
@@ -136,15 +129,18 @@ namespace Consola
         public static void VuelosCodigoAeropuerto()
         {
             Console.Clear();
+            string codAeropuerto = ObtenerPalabras("Ingrese el código del aeropuerto: ");
 
-            string codAeropuerto = ObtenerPalabras("Ingrese el código del aeropuerto: ").ToUpper();
-
-            foreach(Vuelo v in miSistema.Vuelos) 
+            List<Vuelo> vuelos = miSistema.ObtenerVuelosPorCodigoAeropuerto(codAeropuerto);
+            if (vuelos.Count == 0)
             {
-                Ruta r = v.Ruta;
-                if (r.aeropuertoLlegada.codigo == codAeropuerto || r.aeropuertoSalida.codigo == codAeropuerto)
+                Console.WriteLine("No se encontraron vuelos para ese aeropuerto.");
+            }
+            else
+            {
+                foreach (Vuelo v in vuelos)
                 {
-                        Console.WriteLine(v);
+                    Console.WriteLine(v);
                 }
             }
         }
@@ -167,8 +163,26 @@ namespace Consola
             {
                 MensajeError(ex.Message);
             }
-
         }
+
+        static void ListarPublicacionesEntreFechas()
+        {
+            DateTime fecha1 = PedirFecha("Ingrese fecha inicial: ");
+            DateTime fecha2 = PedirFecha("Ingrese fecha final: ");
+            List<Pasaje> listaPasajes = miSistema.ObtenerPasajesEntreFechas(fecha1, fecha2);
+            if (listaPasajes.Count == 0)
+            {
+                MensajeError("No se encontraron pasajes entre esas fechas");
+            }
+            else
+            {
+                foreach (Pasaje p in listaPasajes)
+                {
+                    Console.WriteLine(p);
+                }
+            }
+        }
+
     }
 }
 

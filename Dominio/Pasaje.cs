@@ -13,19 +13,37 @@ namespace Dominio
         private static int s_ultimoId = 1;
         private Vuelo _vuelo;
         private DateTime _fechaDelVuelo;
-        private Usuario _cliente;
+        private Cliente _cliente;
+        //private Usuario _usuario;
         private Equipaje _equipaje;
         private double _precio;
 
-        public Pasaje(Vuelo vuelo, DateTime fechaDelVuelo, Usuario cliente, Equipaje equipaje, double precio)
+        public DateTime FechaVuelo
+        {
+            get { return _fechaDelVuelo; }
+        }
+
+        public Pasaje(Vuelo vuelo, DateTime fechaDelVuelo, Cliente cliente, Equipaje equipaje, double precio)
         {
             _id = s_ultimoId++;
             _vuelo = vuelo;
             _fechaDelVuelo = fechaDelVuelo;
             _cliente = cliente;
             _equipaje = equipaje;
-            _precio = 0;
+            _precio = precio;
         }
+
+        //public Pasaje(Vuelo vuelo, DateTime fechaDelVuelo, Usuario usuario, Equipaje equipaje, double precio)
+        //{
+        //    _id = s_ultimoId++;
+        //    if (usuario == null) throw new Exception("El cliente no puede ser nulo");
+        //    _vuelo = vuelo;
+        //    _fechaDelVuelo = fechaDelVuelo;
+        //    _usuario = usuario;
+        //    _equipaje = equipaje;
+        //    _precio = precio;
+        //}
+
 
         public void Validar()
         {
@@ -40,6 +58,21 @@ namespace Dominio
             Pasaje p = obj as Pasaje;
             return p != null && p._id == this._id;
         }
+
+        //public override string ToString()
+        //{
+        //    return $"ID: {_id} - Nombre del cliente: {_cliente.Nombre} - Fecha: {_fechaDelVuelo} - Número de vuelo: {_vuelo.numVuelo} ";
+        //}
+
+        public override string ToString()
+        {
+            if (_cliente == null)
+            {
+                return $"ID: {_id} - Cliente no encontrado - Fecha: {_fechaDelVuelo.ToShortDateString()} - Número de vuelo: {_vuelo.numVuelo} ";
+            }
+            return $"ID: {_id} - Nombre del cliente: {_cliente.Nombre} - Fecha: {_fechaDelVuelo.ToShortDateString()} - Número de vuelo: {_vuelo.numVuelo} ";
+        }
+
 
         //Método para calcular el precio del pasaje
         public void CalculoDePrecio() {}

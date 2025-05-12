@@ -19,6 +19,11 @@ namespace Dominio
             get { return _id; } 
         }
 
+        public string Email
+        {
+            get { return _email; }
+        }
+
         public Usuario(string email, string password)
         {
             _id = s_ultimoId++;

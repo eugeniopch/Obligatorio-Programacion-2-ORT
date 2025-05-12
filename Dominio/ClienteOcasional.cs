@@ -10,7 +10,10 @@ namespace Dominio
     {
         private bool _esElegible;
 
-        public ClienteOcasional(string email, string password, string documento, string nombreCompleto, string nacionalidad) : base(email, password, documento, nombreCompleto, nacionalidad){}
+        public ClienteOcasional(string email, string password, string documento, string nombreCompleto, string nacionalidad) : base(email, password, documento, nombreCompleto, nacionalidad)
+        {
+            DeterminarElegibilidad();
+        }
 
         public override string ToString()
         {
@@ -24,9 +27,9 @@ namespace Dominio
         }
 
         //Método para determinar elegibilidad del cliente
-        Random random = new Random();
         public void DeterminarElegibilidad()
         {
+            Random random = new Random();
             _esElegible = random.Next(2) == 0;
         }
 

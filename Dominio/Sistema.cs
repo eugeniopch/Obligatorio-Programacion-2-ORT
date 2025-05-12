@@ -164,33 +164,33 @@ namespace Dominio
 
         public void PrecargarPasajes()
         {
-            CrearPasaje("AA101", 3, Equipaje.LIGHT, new DateTime(2025, 5, 19));    // Lunes
-            CrearPasaje("DL202", 4, Equipaje.CABINA, new DateTime(2025, 5, 20));   // Martes
-            CrearPasaje("UA303", 5, Equipaje.BODEGA, new DateTime(2025, 5, 21));   // Miércoles
-            CrearPasaje("AF404", 6, Equipaje.LIGHT, new DateTime(2025, 5, 24));    // Sábado
-            CrearPasaje("LH505", 7, Equipaje.CABINA, new DateTime(2025, 5, 22));   // Jueves
-            CrearPasaje("BA606", 8, Equipaje.BODEGA, new DateTime(2025, 5, 23));   // Viernes
-            CrearPasaje("EK707", 9, Equipaje.LIGHT, new DateTime(2025, 5, 18));    // Domingo
-            CrearPasaje("QF808", 10, Equipaje.CABINA, new DateTime(2025, 5, 27));  // Martes
-            CrearPasaje("KL909", 11, Equipaje.BODEGA, new DateTime(2025, 5, 24));  // Sábado
-            CrearPasaje("AI110", 12, Equipaje.LIGHT, new DateTime(2025, 5, 21));   // Miércoles
-            CrearPasaje("TK121", 3, Equipaje.CABINA, new DateTime(2025, 5, 19));   // Lunes
-            CrearPasaje("AC132", 4, Equipaje.BODEGA, new DateTime(2025, 5, 23));   // Viernes
-            CrearPasaje("NZ143", 5, Equipaje.LIGHT, new DateTime(2025, 5, 20));    // Martes
-            CrearPasaje("CX154", 6, Equipaje.CABINA, new DateTime(2025, 5, 24));   // Sábado
-            CrearPasaje("ET165", 7, Equipaje.BODEGA, new DateTime(2025, 5, 19));   // Lunes
-            CrearPasaje("IB176", 8, Equipaje.LIGHT, new DateTime(2025, 5, 21));    // Miércoles
-            CrearPasaje("AV187", 9, Equipaje.CABINA, new DateTime(2025, 5, 18));   // Domingo
-            CrearPasaje("LA198", 10, Equipaje.BODEGA, new DateTime(2025, 5, 23));  // Viernes
-            CrearPasaje("TP209", 11, Equipaje.LIGHT, new DateTime(2025, 5, 26));   // Lunes
-            CrearPasaje("SA210", 12, Equipaje.CABINA, new DateTime(2025, 5, 22));  // Jueves
-            CrearPasaje("KE221", 3, Equipaje.BODEGA, new DateTime(2025, 5, 21));   // Miércoles
-            CrearPasaje("JL232", 4, Equipaje.LIGHT, new DateTime(2025, 5, 20));    // Martes
-            CrearPasaje("SU243", 5, Equipaje.CABINA, new DateTime(2025, 5, 24));   // Sábado
-            CrearPasaje("AZ254", 6, Equipaje.BODEGA, new DateTime(2025, 5, 25));   // Domingo
-            CrearPasaje("SK265", 7, Equipaje.LIGHT, new DateTime(2025, 5, 26));    // Lunes
-
+            CrearPasaje("AA101", "12345678", Equipaje.LIGHT, new DateTime(2025, 5, 19));
+            CrearPasaje("DL202", "23456789", Equipaje.CABINA, new DateTime(2025, 5, 20));
+            CrearPasaje("UA303", "34567890", Equipaje.BODEGA, new DateTime(2025, 5, 21));
+            CrearPasaje("AF404", "45678901", Equipaje.LIGHT, new DateTime(2025, 5, 24));
+            CrearPasaje("LH505", "56789012", Equipaje.CABINA, new DateTime(2025, 5, 22));
+            CrearPasaje("BA606", "67890123", Equipaje.BODEGA, new DateTime(2025, 5, 23));
+            CrearPasaje("EK707", "78901234", Equipaje.LIGHT, new DateTime(2025, 5, 18));
+            CrearPasaje("QF808", "89012345", Equipaje.CABINA, new DateTime(2025, 5, 27));
+            CrearPasaje("KL909", "90123456", Equipaje.BODEGA, new DateTime(2025, 5, 24));
+            CrearPasaje("AI110", "01234567", Equipaje.LIGHT, new DateTime(2025, 5, 21));
+            CrearPasaje("TK121", "12345678", Equipaje.CABINA, new DateTime(2025, 5, 19));
+            CrearPasaje("AC132", "23456789", Equipaje.BODEGA, new DateTime(2025, 5, 23));
+            CrearPasaje("NZ143", "34567890", Equipaje.LIGHT, new DateTime(2025, 5, 20));
+            CrearPasaje("CX154", "45678901", Equipaje.CABINA, new DateTime(2025, 5, 24));
+            CrearPasaje("ET165", "56789012", Equipaje.BODEGA, new DateTime(2025, 5, 19));
+            CrearPasaje("IB176", "67890123", Equipaje.LIGHT, new DateTime(2025, 5, 21));
+            CrearPasaje("AV187", "78901234", Equipaje.CABINA, new DateTime(2025, 5, 18));
+            CrearPasaje("LA198", "89012345", Equipaje.BODEGA, new DateTime(2025, 5, 23));
+            CrearPasaje("TP209", "90123456", Equipaje.LIGHT, new DateTime(2025, 5, 26));
+            CrearPasaje("SA210", "01234567", Equipaje.CABINA, new DateTime(2025, 5, 22));
+            CrearPasaje("KE221", "12345678", Equipaje.BODEGA, new DateTime(2025, 5, 21));
+            CrearPasaje("JL232", "23456789", Equipaje.LIGHT, new DateTime(2025, 5, 20));
+            CrearPasaje("SU243", "34567890", Equipaje.CABINA, new DateTime(2025, 5, 24));
+            CrearPasaje("AZ254", "45678901", Equipaje.BODEGA, new DateTime(2025, 5, 25));
+            CrearPasaje("SK265", "56789012", Equipaje.LIGHT, new DateTime(2025, 5, 26));
         }
+
 
         public void CrearAeropuerto(Aeropuerto aeropuerto)
         {
@@ -245,18 +245,19 @@ namespace Dominio
             _usuarios.Add(usuario);
         }
 
-        public void CrearPasaje(string codVuelo, int idCliente, Equipaje equipaje, DateTime fechaVuelo)
+        public void CrearPasaje(string codVuelo, string documento, Equipaje equipaje, DateTime fechaVuelo)
         {
             Vuelo vuelo = ObtenerVueloPorId(codVuelo);
-            Usuario usuario = ObtenerUsuarioPorId(idCliente);
-            
-            if (idCliente == 1 || idCliente == 2) throw new Exception("No se pueden crear pasajes con usuarios Administradores");
+            Cliente cliente = ObtenerClientePorDoc(documento);
+            if (cliente == null) throw new Exception($"No se encontró un cliente con el documento {documento}");
+
+
             if (!vuelo.frecuencia.Contains(fechaVuelo.DayOfWeek)) throw new Exception("La fecha ingresada no coincide con los días disponibles para este vuelo");
-            
-            Pasaje pasaje = new Pasaje(vuelo, fechaVuelo, usuario, equipaje, 0);
-            
+
+            Pasaje pasaje = new Pasaje(vuelo, fechaVuelo, cliente, equipaje, 0);
             if (_pasajes.Contains(pasaje)) throw new Exception("Ya existe un pasaje con ese id");
             _pasajes.Add(pasaje);
+
         }
 
         public Aeropuerto ObtenerAeropuertoPorId(string codAeropuerto)
@@ -319,32 +320,62 @@ namespace Dominio
             return vuelo;
         }
 
-        public Usuario ObtenerUsuarioPorId(int idUsuario)
+        public Cliente ObtenerClientePorDoc(string documento)
         {
-            Usuario usuario = null;
-            int i = 0;
-            while (usuario == null && i < _usuarios.Count)
+            foreach (Usuario u in _usuarios)
             {
-                if (_usuarios[i].id == idUsuario)
+                if (u is Cliente c && c.Documento == documento)
                 {
-                    usuario = _usuarios[i];
+                    return c;
                 }
-                i++;
             }
-            return usuario;
+            return null;
         }
 
-
-        //Método para mostrar los aeropuertos
-        public void MostrarAeropuertos()
+        public List<Vuelo> ObtenerVuelosPorCodigoAeropuerto(string codigo)
         {
-            foreach (var aeropuerto in _aeropuertos)
+            List<Vuelo> resultado = new List<Vuelo>();
+            string codigoMayus = codigo.ToUpper();
+
+            foreach (Vuelo v in _vuelos)
             {
-                Console.WriteLine(aeropuerto);
+                Ruta r = v.Ruta;
+                if (r.aeropuertoSalida.codigo == codigoMayus || r.aeropuertoLlegada.codigo == codigoMayus)
+                {
+                    resultado.Add(v);
+                }
             }
+
+            return resultado;
         }
 
+        public List<Pasaje> ObtenerPasajesEntreFechas(DateTime fecha1, DateTime fecha2)
+        {
+            List<Pasaje> listadoPasajes = new List<Pasaje>();
 
+            if (fecha1.Date < fecha2.Date)
+            {
+
+                foreach (Pasaje p in _pasajes)
+                {
+                    if (p.FechaVuelo.Date > fecha1.Date && p.FechaVuelo.Date < fecha2.Date)
+                    {
+                        listadoPasajes.Add(p);
+                    }
+                }
+            }
+            else
+            {
+                foreach (Pasaje p in _pasajes)
+                {
+                    if (p.FechaVuelo.Date > fecha2.Date && p.FechaVuelo.Date < fecha1.Date)
+                    {
+                        listadoPasajes.Add(p);
+                    }
+                }
+            }
+            return listadoPasajes;
+        }
 
     }
 }

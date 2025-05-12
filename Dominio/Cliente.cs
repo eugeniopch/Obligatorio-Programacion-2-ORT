@@ -12,6 +12,16 @@ namespace Dominio
         protected string _nombreCompleto;
         protected string _nacionalidad;
 
+        public string Documento
+        {
+            get { return _documento; }
+        }
+
+        public string Nombre
+        {
+            get { return _nombreCompleto; }
+        }
+
         public Cliente(string email, string password, string documento, string nombreCompleto, string nacionalidad) : base(email, password)
         {
             _documento = documento;
@@ -27,4 +37,5 @@ namespace Dominio
             if (string.IsNullOrEmpty(_nacionalidad)) throw new Exception("La nacionalidad no puede estar vacía");
         }
     }
+
 }
