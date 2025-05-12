@@ -52,4 +52,5 @@ namespace Dominio
             return a != null && a._codigoIATA == this._codigoIATA;
         }
     }
+
 }

@@ -14,7 +14,6 @@ namespace Dominio
         private Vuelo _vuelo;
         private DateTime _fechaDelVuelo;
         private Cliente _cliente;
-        //private Usuario _usuario;
         private Equipaje _equipaje;
         private double _precio;
 
@@ -33,17 +32,8 @@ namespace Dominio
             _precio = precio;
         }
 
-        //public Pasaje(Vuelo vuelo, DateTime fechaDelVuelo, Usuario usuario, Equipaje equipaje, double precio)
-        //{
-        //    _id = s_ultimoId++;
-        //    if (usuario == null) throw new Exception("El cliente no puede ser nulo");
-        //    _vuelo = vuelo;
-        //    _fechaDelVuelo = fechaDelVuelo;
-        //    _usuario = usuario;
-        //    _equipaje = equipaje;
-        //    _precio = precio;
-        //}
-
+        //Método para calcular el precio del pasaje
+        public void CalculoDePrecio() {}
 
         public void Validar()
         {
@@ -52,17 +42,6 @@ namespace Dominio
             if (_fechaDelVuelo == new DateTime()) throw new Exception("La fecha del vuelo no es válida");
             if (_precio < 0) throw new Exception("El precio no puede ser un valor menor a 0");
         }
-
-        public override bool Equals(object obj)
-        {
-            Pasaje p = obj as Pasaje;
-            return p != null && p._id == this._id;
-        }
-
-        //public override string ToString()
-        //{
-        //    return $"ID: {_id} - Nombre del cliente: {_cliente.Nombre} - Fecha: {_fechaDelVuelo} - Número de vuelo: {_vuelo.numVuelo} ";
-        //}
 
         public override string ToString()
         {
@@ -73,8 +52,11 @@ namespace Dominio
             return $"ID: {_id} - Nombre del cliente: {_cliente.Nombre} - Fecha: {_fechaDelVuelo.ToShortDateString()} - Número de vuelo: {_vuelo.numVuelo} ";
         }
 
-
-        //Método para calcular el precio del pasaje
-        public void CalculoDePrecio() {}
+        public override bool Equals(object obj)
+        {
+            Pasaje p = obj as Pasaje;
+            return p != null && p._id == this._id;
+        }
     }
+
 }

@@ -15,6 +15,13 @@ namespace Dominio
             _puntos = puntos;
         }
 
+        //Método para modificar los puntos del cliente premium
+
+        public void ModificarPuntos(int puntos) 
+        {
+            _puntos = puntos;
+        }
+
         public override void Validar()
         {
             base.Validar();
@@ -25,9 +32,6 @@ namespace Dominio
         {
             return $"id {_id} Nombre: {_nombreCompleto} - Email: {_email} - Nacionalidad: {_nacionalidad} - Puntos: {_puntos} - CLIENTE PREMIUM";
         }
-
-        //Método para modificar los puntos del cliente premium
-
-        public void ModificarPuntos() { }
     }
+
 }

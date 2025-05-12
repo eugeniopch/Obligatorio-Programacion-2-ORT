@@ -15,6 +15,19 @@ namespace Dominio
             DeterminarElegibilidad();
         }
 
+        //Método para determinar elegibilidad del cliente
+        public void DeterminarElegibilidad()
+        {
+            Random random = new Random();
+            _esElegible = random.Next(2) == 0;
+        }
+
+        //Método para cambiar el estado de elegible
+        public void CambiarEstadoElegible()
+        {
+            _esElegible = !_esElegible;
+        }
+
         public override string ToString()
         {
             return $"id {_id} Nombre: {_nombreCompleto} - Email: {_email} - Nacionalidad: {_nacionalidad} - Es elegible: {_esElegible} - CLIENTE OCASIONAL";
@@ -25,20 +38,6 @@ namespace Dominio
             ClienteOcasional c = obj as ClienteOcasional;
             return c != null && c._email == this._email;
         }
-
-        //Método para determinar elegibilidad del cliente
-        public void DeterminarElegibilidad()
-        {
-            Random random = new Random();
-            _esElegible = random.Next(2) == 0;
-        }
-
-
-        //Método para cambiar el estado de elegible
-        public void CambiarEstadoElegible()
-        {
-            _esElegible = !_esElegible;
-        }
-
     }
+
 }

@@ -43,4 +43,5 @@ namespace Dominio
             return u != null && u._email == this._email;
         }
     }
+
 }

@@ -36,9 +36,24 @@ namespace Dominio
             _avion = avion;
             _ruta = ruta;
             _frecuencia = frecuencia;
-            _costoPorAsiento = -1; // se inicializa con un valor temporal
+            _costoPorAsiento = -1;
         }
 
+
+        //Método para determinar si el alcance es suficiente
+        public void AlcanceSuficiente()
+        {
+            if (_avion.alcance < _ruta.distancia) throw new Exception("El avión no tiene el suficiente alcance para cubrir la distancia de la ruta");
+        }
+
+        //Método para calcular el costo por asiento
+        public void CalcularCostoPorAsiento()
+        {
+            if (_avion == null || _ruta == null || _ruta.aeropuertoSalida == null || _ruta.aeropuertoLlegada == null)
+                throw new Exception("No se puede calcular el costo por asiento porque falta información");
+
+            _costoPorAsiento = (_avion.costoKm * _ruta.distancia + _ruta.aeropuertoSalida.costoOperacion + _ruta.aeropuertoLlegada.costoOperacion) / _avion.cantidadAsientos;
+        }
         public void Validar()
         {
             if (string.IsNullOrEmpty(_numeroDeVuelo)) throw new Exception("El número de vuelo no puede estar vacío");
@@ -59,21 +74,6 @@ namespace Dominio
             string dias = string.Join(", ", _frecuencia);
             return $"Número de vuelo : {_numeroDeVuelo} - Modelo del avión : {_avion.Modelo} - Ruta : {_ruta.aeropuertoSalida.codigo} - {_ruta.aeropuertoLlegada.codigo} - Frecuencia : {dias}";
         }
-
-        //Método para determinar si el alcance es suficiente
-        public void AlcanceSuficiente()
-        {
-            if (_avion.alcance < _ruta.distancia) throw new Exception("El avión no tiene el suficiente alcance para cubrir la distancia de la ruta");
-        }
-
-        //Método para calcular el costo por asiento
-        public void CalcularCostoPorAsiento()
-        {
-            if (_avion == null || _ruta == null || _ruta.aeropuertoSalida == null || _ruta.aeropuertoLlegada == null)
-                throw new Exception("No se puede calcular el costo por asiento porque falta información");
-
-            _costoPorAsiento = (_avion.costoKm * _ruta.distancia + _ruta.aeropuertoSalida.costoOperacion + _ruta.aeropuertoLlegada.costoOperacion) / _avion.cantidadAsientos;
-        }
-
     }
+
 }

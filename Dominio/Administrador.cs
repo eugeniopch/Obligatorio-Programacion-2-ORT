@@ -24,6 +24,6 @@ namespace Dominio
         {
             return $"Usuario: {_apodo} - Email: {_email} - ADMINISTRADOR";
         }
-
     }
+
 }
