@@ -15,12 +15,12 @@ namespace Dominio
         private double _costoDeOperacion;
         private double _costoTasas;
 
-        public string codigo
+        public string Codigo
         {
             get { return _codigoIATA; }
         }
 
-        public double costoOperacion
+        public double CostoOperacion
         {
             get { return _costoDeOperacion; }
         }

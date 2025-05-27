@@ -16,22 +16,22 @@ namespace Dominio
         private int _alcance;
         private double _costoDeOperacionPorKm;
 
-        public int alcance
+        public int Alcance
         {
             get { return _alcance; }
         }
 
-        public int id
+        public int Id
         {
             get { return _id; }
         }
 
-        public double costoKm
+        public double CostoKm
         { 
             get { return _costoDeOperacionPorKm; } 
         }
 
-        public int cantidadAsientos
+        public int CantidadAsientos
         {
             get { return _cantidadAsientos; }
         }

@@ -15,22 +15,22 @@ namespace Dominio
         private Aeropuerto _aeropuertoLlegada;
         private int _distancia;
 
-        public int distancia 
+        public int Distancia
         {
             get { return _distancia; }
         }
 
-        public int id
+        public int Id
         {
             get { return _id; }
         }
 
-        public Aeropuerto aeropuertoSalida
+        public Aeropuerto AeropuertoSalida
         {
             get { return _aeropuertoSalida; }
         }
 
-        public Aeropuerto aeropuertoLlegada
+        public Aeropuerto AeropuertoLlegada
         {
             get { return _aeropuertoLlegada; }
         }

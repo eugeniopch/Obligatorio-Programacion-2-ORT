@@ -14,7 +14,7 @@ namespace Dominio
         protected string _email;
         protected string _password;
 
-        public int id
+        public int Id
         {
             get { return _id; } 
         }

@@ -227,7 +227,6 @@ namespace Dominio
             if (ruta == null) throw new Exception("Ruta no encontrada");
 
             Vuelo vuelo = new Vuelo(numeroVuelo, avion, ruta, frecuencia);
-            vuelo.AlcanceSuficiente();
             vuelo.CalcularCostoPorAsiento();
             vuelo.Validar();
 
@@ -251,8 +250,8 @@ namespace Dominio
             Cliente cliente = ObtenerClientePorDoc(documento);
             if (cliente == null) throw new Exception($"No se encontró un cliente con el documento {documento}");
 
-
-            if (!vuelo.frecuencia.Contains(fechaVuelo.DayOfWeek)) throw new Exception("La fecha ingresada no coincide con los días disponibles para este vuelo");
+            //validación de vuelo
+            if (!vuelo.Frecuencia.Contains(fechaVuelo.DayOfWeek)) throw new Exception("La fecha ingresada no coincide con los días disponibles para este vuelo");
 
             Pasaje pasaje = new Pasaje(vuelo, fechaVuelo, cliente, equipaje, 0);
             if (_pasajes.Contains(pasaje)) throw new Exception("Ya existe un pasaje con ese id");
@@ -266,7 +265,7 @@ namespace Dominio
             int i = 0;
             while (aero == null && i < _aeropuertos.Count)
             {
-                if (_aeropuertos[i].codigo == codAeropuerto)
+                if (_aeropuertos[i].Codigo == codAeropuerto)
                 {
                     aero = _aeropuertos[i];
                 }
@@ -281,7 +280,7 @@ namespace Dominio
             int i = 0;
             while (avion == null && i < _aviones.Count)
             {
-                if (_aviones[i].id == idAvion)
+                if (_aviones[i].Id == idAvion)
                 {
                     avion = _aviones[i];
                 }
@@ -296,7 +295,7 @@ namespace Dominio
             int i = 0;
             while (ruta == null && i < _rutas.Count)
             {
-                if (_rutas[i].id == idRuta)
+                if (_rutas[i].Id == idRuta)
                 {
                     ruta = _rutas[i];
                 }
@@ -311,7 +310,7 @@ namespace Dominio
             int i = 0;
             while (vuelo == null && i < _vuelos.Count)
             {
-                if (_vuelos[i].numVuelo == codVuelo)
+                if (_vuelos[i].NumVuelo == codVuelo)
                 {
                     vuelo = _vuelos[i];
                 }
@@ -340,7 +339,7 @@ namespace Dominio
             foreach (Vuelo v in _vuelos)
             {
                 Ruta r = v.Ruta;
-                if (r.aeropuertoSalida.codigo == codigoMayus || r.aeropuertoLlegada.codigo == codigoMayus)
+                if (r.AeropuertoSalida.Codigo == codigoMayus || r.AeropuertoLlegada.Codigo == codigoMayus)
                 {
                     resultado.Add(v);
                 }

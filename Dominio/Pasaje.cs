@@ -47,9 +47,9 @@ namespace Dominio
         {
             if (_cliente == null)
             {
-                return $"ID: {_id} - Cliente no encontrado - Fecha: {_fechaDelVuelo.ToShortDateString()} - Número de vuelo: {_vuelo.numVuelo} ";
+                return $"ID: {_id} - Cliente no encontrado - Fecha: {_fechaDelVuelo.ToShortDateString()} - Número de vuelo: {_vuelo.NumVuelo} ";
             }
-            return $"ID: {_id} - Nombre del cliente: {_cliente.Nombre} - Fecha: {_fechaDelVuelo.ToShortDateString()} - Número de vuelo: {_vuelo.numVuelo} ";
+            return $"ID: {_id} - Nombre del cliente: {_cliente.Nombre} - Fecha: {_fechaDelVuelo.ToShortDateString()} - Número de vuelo: {_vuelo.NumVuelo} ";
         }
 
         public override bool Equals(object obj)
