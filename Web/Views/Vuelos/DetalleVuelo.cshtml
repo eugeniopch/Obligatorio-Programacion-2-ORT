@@ -1,0 +1,75 @@
+﻿@using Dominio;
+
+@{
+    ViewData["Title"] = "DetalleVuelo";
+}
+
+<h1 class="h1 mb-4">Detalle del vuelo</h1>
+
+@if (ViewBag.Vuelo == null)
+{
+    <div class="alert alert-danger">Vuelo no encontrado</div>
+}
+else
+{
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <h5 class="card-title text-primary mb-3">Código <span class="fw-bold">@ViewBag.Vuelo.NumVuelo</span></h5>
+
+            <p class="mb-2">
+                <span class="fw-bold">Aeropuerto de salida</span><br />
+                <span class="text-muted">@ViewBag.Vuelo.Ruta.AeropuertoSalida.Codigo - @ViewBag.Vuelo.Ruta.AeropuertoSalida.Ciudad</span>
+            </p>
+
+            <p class="mb-2">
+                <span class="fw-bold">Aeropuerto de llegada</span><br />
+                <span class="text-muted">@ViewBag.Vuelo.Ruta.AeropuertoLlegada.Codigo - @ViewBag.Vuelo.Ruta.AeropuertoLlegada.Ciudad</span>
+            </p>
+
+            <p class="mb-0">
+                <span class="fw-bold">Frecuencia</span><br />
+                @foreach (var dia in ViewBag.Vuelo.Frecuencia)
+                {
+                    var (nombreDia, color) = dia switch
+                    {
+                        DayOfWeek.Monday => ("Lunes", "primary"),
+                        DayOfWeek.Tuesday => ("Martes", "success"),
+                        DayOfWeek.Wednesday => ("Miércoles", "info"),
+                        DayOfWeek.Thursday => ("Jueves", "warning"),
+                        DayOfWeek.Friday => ("Viernes", "danger"),
+                        DayOfWeek.Saturday => ("Sábado", "dark"),
+                        DayOfWeek.Sunday => ("Domingo", "secondary"),
+                        _ => (dia.ToString(), "light")
+                    };
+                    <span class="badge bg-@color me-1">@nombreDia</span>
+                }
+            </p>
+        </div>
+    </div>
+
+    <h5 class="mb-3">Comprar pasaje</h5>
+
+    <form action="/pasajes/ComprarPasaje" method="post" class="row g-3">
+        <div class="col-md-6">
+            <label for="FechaVuelo" class="form-label">Fecha del vuelo</label>
+            <input type="date" name="FechaVuelo" id="FechaVuelo" class="form-control" required />
+        </div>
+
+        <div class="col-md-6">
+            <label for="Equipaje" class="form-label">Tipo de equipaje</label>
+            <select name="Equipaje" id="Equipaje" class="form-select" required>
+                <option value="">Seleccione una opción</option>
+                @foreach (var tipo in Enum.GetValues(typeof(Equipaje)))
+                {
+                    <option value="@tipo">@tipo</option>
+                }
+            </select>
+        </div>
+
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Comprar pasaje</button>
+        </div>
+    </form>
+}
+
+

@@ -8,12 +8,22 @@ namespace Dominio
 {
     public class Sistema
     {
+        private static Sistema s_instancia;
         private List<Usuario> _usuarios = new List<Usuario>();
         private List<Vuelo> _vuelos = new List<Vuelo>();
         private List<Pasaje> _pasajes = new List<Pasaje>();
         private List<Avion> _aviones = new List<Avion>();
         private List<Ruta> _rutas = new List<Ruta>();
         private List<Aeropuerto> _aeropuertos = new List<Aeropuerto>();
+
+        public static Sistema Instancia
+        {  
+            get 
+            { 
+                if (s_instancia == null) s_instancia = new Sistema();
+                return s_instancia;
+            } 
+        }
 
         public List<Usuario> Usuarios
         {  
@@ -30,7 +40,7 @@ namespace Dominio
             get { return _rutas; }
         }
 
-        public Sistema()
+        private Sistema()
         {
             PrecargarAeropuertos();
             PrecargarAviones();
@@ -155,11 +165,11 @@ namespace Dominio
             CrearUsuario(new ClientePremium("premium5@correo.com", "clave654", "56789012", "Valentina Díaz", "Uruguaya", 250));
 
             // Clientes Ocasionales
-            CrearUsuario(new ClienteOcasional("ocasional1@correo.com", "pass111", "67890123", "Mateo Fernández", "Brasileño"));
-            CrearUsuario(new ClienteOcasional("ocasional2@correo.com", "pass222", "78901234", "Martina Gómez", "Uruguaya"));
-            CrearUsuario(new ClienteOcasional("ocasional3@correo.com", "pass333", "89012345", "Joaquín López", "Boliviano"));
-            CrearUsuario(new ClienteOcasional("ocasional4@correo.com", "pass444", "90123456", "Sofía Herrera", "Argentina"));
-            CrearUsuario(new ClienteOcasional("ocasional5@correo.com", "pass555", "01234567", "Emilia Costa", "Uruguaya"));
+            CrearUsuario(new ClienteOcasional("ocasional1@correo.com", "pass1111", "67890123", "Mateo Fernández", "Brasileño"));
+            CrearUsuario(new ClienteOcasional("ocasional2@correo.com", "pass2222", "78901234", "Martina Gómez", "Uruguaya"));
+            CrearUsuario(new ClienteOcasional("ocasional3@correo.com", "pass3333", "89012345", "Joaquín López", "Boliviano"));
+            CrearUsuario(new ClienteOcasional("ocasional4@correo.com", "pass4444", "90123456", "Sofía Herrera", "Argentina"));
+            CrearUsuario(new ClienteOcasional("ocasional5@correo.com", "pass5555", "01234567", "Emilia Costa", "Uruguaya"));
         }
 
         public void PrecargarPasajes()
@@ -256,7 +266,6 @@ namespace Dominio
             Pasaje pasaje = new Pasaje(vuelo, fechaVuelo, cliente, equipaje, 0);
             if (_pasajes.Contains(pasaje)) throw new Exception("Ya existe un pasaje con ese id");
             _pasajes.Add(pasaje);
-
         }
 
         public Aeropuerto ObtenerAeropuertoPorId(string codAeropuerto)
@@ -375,6 +384,18 @@ namespace Dominio
             }
             return listadoPasajes;
         }
-    }
 
+        public Usuario Login(string email, string pass) 
+        {
+            Usuario buscado = null;
+            int i = 0;
+            while (buscado == null && i < _usuarios.Count)
+            {
+                if (_usuarios[i].Email.ToLower() == email && _usuarios[i].Password == pass) buscado = _usuarios[i];
+                i++;
+            }
+            return buscado;
+        }
+    
+    }
 }

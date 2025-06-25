@@ -11,25 +11,25 @@ namespace Dominio
     {
         private int _id;
         private static int s_ultimoId = 1;
-        private Vuelo _vuelo;
-        private DateTime _fechaDelVuelo;
-        private Cliente _cliente;
-        private Equipaje _equipaje;
-        private double _precio;
+        public Vuelo Vuelo { get; set; }
+        public DateTime FechaVuelo { get; set; }
+        public Cliente Cliente { get; set; }
+        public Equipaje Equipaje { get; set; }
+        public double Precio { get; set; }
 
-        public DateTime FechaVuelo
+        public Pasaje() 
         {
-            get { return _fechaDelVuelo; }
+            _id = s_ultimoId++;
         }
 
         public Pasaje(Vuelo vuelo, DateTime fechaDelVuelo, Cliente cliente, Equipaje equipaje, double precio)
         {
             _id = s_ultimoId++;
-            _vuelo = vuelo;
-            _fechaDelVuelo = fechaDelVuelo;
-            _cliente = cliente;
-            _equipaje = equipaje;
-            _precio = precio;
+            Vuelo = vuelo;
+            FechaVuelo = fechaDelVuelo;
+            Cliente = cliente;
+            Equipaje = equipaje;
+            Precio = precio;
         }
 
         //Método para calcular el precio del pasaje
@@ -37,19 +37,19 @@ namespace Dominio
 
         public void Validar()
         {
-            if (_vuelo == null) throw new Exception("El vuelo no puede ser nulo");
-            if (_cliente == null) throw new Exception("El cliente no puede ser nulo");
-            if (_fechaDelVuelo == new DateTime()) throw new Exception("La fecha del vuelo no es válida");
-            if (_precio < 0) throw new Exception("El precio no puede ser un valor menor a 0");
+            if (Vuelo == null) throw new Exception("El vuelo no puede ser nulo");
+            if (Cliente == null) throw new Exception("El cliente no puede ser nulo");
+            if (FechaVuelo == new DateTime()) throw new Exception("La fecha del vuelo no es válida");
+            if (Precio < 0) throw new Exception("El precio no puede ser un valor menor a 0");
         }
 
         public override string ToString()
         {
-            if (_cliente == null)
+            if (Cliente == null)
             {
-                return $"ID: {_id} - Cliente no encontrado - Fecha: {_fechaDelVuelo.ToShortDateString()} - Número de vuelo: {_vuelo.NumVuelo} ";
+                return $"ID: {_id} - Cliente no encontrado - Fecha: {FechaVuelo.ToShortDateString()} - Número de vuelo: {Vuelo.NumVuelo} ";
             }
-            return $"ID: {_id} - Nombre del cliente: {_cliente.Nombre} - Fecha: {_fechaDelVuelo.ToShortDateString()} - Número de vuelo: {_vuelo.NumVuelo} ";
+            return $"ID: {_id} - Nombre del cliente: {Cliente.Nombre} - Fecha: {FechaVuelo.ToShortDateString()} - Número de vuelo: {Vuelo.NumVuelo} ";
         }
 
         public override bool Equals(object obj)

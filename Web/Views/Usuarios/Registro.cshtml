@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewData["Title"] = "Registro";
+}
+
+<div class="card shadow-sm p-4 w-100">
+    <h1 class="h4 mb-4 text-center">Registro de Cliente Ocasional</h1>
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger">@ViewBag.Error</div>
+    }
+
+    @if (ViewBag.Exito != null)
+    {
+        <div class="alert alert-success">@ViewBag.Exito</div>
+    }
+
+    <form action="/usuarios/registro" method="post" class="row g-3">
+        <div class="col-12">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" name="email" id="email" class="form-control" placeholder="Ingrese su email" required />
+        </div>
+
+        <div class="col-12">
+            <label for="pass" class="form-label">Contraseña</label>
+            <input type="password" name="pass" id="pass" class="form-control" placeholder="Ingrese su contraseña" required />
+        </div>
+
+        <div class="col-12">
+            <label for="documento" class="form-label">Documento</label>
+            <input type="text" name="documento" id="documento" class="form-control" placeholder="Ingrese su documento" required />
+        </div>
+
+        <div class="col-12">
+            <label for="nombre" class="form-label">Nombre completo</label>
+            <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Ingrese su nombre completo" required />
+        </div>
+
+        <div class="col-12">
+            <label for="nacionalidad" class="form-label">Nacionalidad</label>
+            <input type="text" name="nacionalidad" id="nacionalidad" class="form-control" placeholder="Ingrese su nacionalidad" required />
+        </div>
+
+        <div class="col-12">
+            <button type="submit" class="btn btn-success w-100">Registrarse</button>
+        </div>
+    </form>
+</div>
+
+
+

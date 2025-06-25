@@ -25,6 +25,11 @@ namespace Dominio
             get { return _costoDeOperacion; }
         }
 
+        public string Ciudad
+        { 
+            get { return _ciudad; } 
+        }
+
         public Aeropuerto(string codigoIATA, string ciudad, double costoDeOperacion, double costoTasas)
         {
             _codigoIATA = codigoIATA;

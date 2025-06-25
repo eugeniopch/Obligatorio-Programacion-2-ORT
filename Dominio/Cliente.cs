@@ -36,6 +36,11 @@ namespace Dominio
             if (string.IsNullOrEmpty(_nombreCompleto)) throw new Exception("El nombre no puede estar vacío");
             if (string.IsNullOrEmpty(_nacionalidad)) throw new Exception("La nacionalidad no puede estar vacía");
         }
+
+        public override string Rol()
+        {
+            return "Cliente";
+        }
     }
 
 }

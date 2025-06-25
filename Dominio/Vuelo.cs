@@ -31,6 +31,16 @@ namespace Dominio
             get { return _ruta; }
         }
 
+        public double CostoPorAsiento
+        {
+            get { return _costoPorAsiento; }
+        }
+
+        public Avion Avion
+        { 
+            get { return _avion; } 
+        }
+
         public Vuelo(string numeroDeVuelo, Avion avion, Ruta ruta, List<DayOfWeek> frecuencia)
         {
             _numeroDeVuelo = numeroDeVuelo;
@@ -46,8 +56,9 @@ namespace Dominio
             if (_avion == null || _ruta == null || _ruta.AeropuertoSalida == null || _ruta.AeropuertoLlegada == null)
                 throw new Exception("No se puede calcular el costo por asiento porque falta información");
 
-            _costoPorAsiento = (_avion.CostoKm * _ruta.Distancia + _ruta.AeropuertoSalida.CostoOperacion + _ruta.AeropuertoLlegada.CostoOperacion) / _avion.CantidadAsientos;
+            _costoPorAsiento = Math.Round((_avion.CostoKm * _ruta.Distancia + _ruta.AeropuertoSalida.CostoOperacion + _ruta.AeropuertoLlegada.CostoOperacion) / _avion.CantidadAsientos);
         }
+
         public void Validar()
         {
             if (string.IsNullOrEmpty(_numeroDeVuelo)) 

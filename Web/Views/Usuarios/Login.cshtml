@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="card shadow-sm p-4 w-100">
+    <h1 class="h4 mb-4 text-center">Login</h1>
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger">Usuario y/o contraseña incorrectos</div>
+    }
+
+    <form action="/usuarios/login" method="post" class="row g-3">
+        <div class="col-12">
+            <label for="email" class="form-label">Correo electrónico</label>
+            <input type="email" name="email" id="email" class="form-control" placeholder="Ingrese su correo" required />
+        </div>
+
+        <div class="col-12">
+            <label for="pass" class="form-label">Contraseña</label>
+            <input type="password" name="pass" id="pass" class="form-control" placeholder="Ingrese su contraseña" required />
+        </div>
+
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary w-100">Iniciar sesión</button>
+        </div>
+    </form>
+</div>
+
+
+

@@ -1,0 +1,68 @@
+﻿@using Dominio;
+
+@{
+    ViewData["Title"] = "Listado";
+}
+
+<h1 class="h1 mb-4">Listado de vuelos</h1>
+
+<div class="d-flex gap-2 mb-4">
+    <form action="/vuelos/listado" method="get" class="d-flex gap-2">
+        <input type="text" name="codigo" class="form-control" placeholder="Ingrese código" />
+        <button type="submit" class="btn btn-primary">Buscar</button>
+    </form>
+
+    <a href="/vuelos/listado" class="btn btn-outline-primary">Borrar filtro</a>
+</div>
+
+
+@if(ViewBag.Listado == null || ViewBag.Listado.Count == 0)
+{
+    <div class="alert alert-danger">No existen vuelos</div>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Número</th>
+                <th>Avión</th>
+                <th>Aeropuerto Salida</th>
+                <th>Aeropuerto Llegada</th>
+                <th>Frecuencia</th>
+                <th>Comprar</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(Vuelo v in ViewBag.Listado)
+            {
+                <tr>
+                    <td>@v.NumVuelo</td>
+                    <td>@v.Avion.Modelo</td>
+                    <td>@v.Ruta.AeropuertoSalida.Codigo</td>
+                    <td>@v.Ruta.AeropuertoLlegada.Codigo</td>
+                    <td>
+                        @foreach (var dia in v.Frecuencia)
+                        {
+                            var (nombreDia, color) = dia switch
+                            {
+                                DayOfWeek.Monday => ("Lunes", "primary"),
+                                DayOfWeek.Tuesday => ("Martes", "success"),
+                                DayOfWeek.Wednesday => ("Miércoles", "info"),
+                                DayOfWeek.Thursday => ("Jueves", "warning"),
+                                DayOfWeek.Friday => ("Viernes", "danger"),
+                                DayOfWeek.Saturday => ("Sábado", "dark"),
+                                DayOfWeek.Sunday => ("Domingo", "secondary"),
+                                _ => (dia.ToString(), "light")
+                            };
+                            <span class="badge bg-@color me-1">@nombreDia</span>
+                        }
+                    </td>
+
+                    <td><a href="/vuelos/detallevuelo?codigo=@v.NumVuelo" class="btn btn-primary">Comprar pasaje</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}
