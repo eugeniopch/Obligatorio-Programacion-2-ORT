@@ -1,0 +1,45 @@
+﻿@using Dominio;
+
+@{
+    ViewData["Title"] = "Perfil";
+}
+
+<h1 class="h3 mb-4">Mi perfil</h1>
+
+@if (ViewBag.Usuario == null)
+{
+    <div class="alert alert-danger">No se pudo cargar la información del usuario.</div>
+}
+else
+{
+    <div class="card shadow-sm" style="max-width: 500px;">
+        <div class="card-body">
+            <table class="table table-borderless mb-0">
+                <tr>
+                    <th scope="row" style="width: 40%;">Documento</th>
+                    <td>@ViewBag.Usuario.Documento</td>
+                </tr>
+                <tr>
+                    <th scope="row">Nombre</th>
+                    <td>@ViewBag.Usuario.Nombre</td>
+                </tr>
+                <tr>
+                    <th scope="row">Email</th>
+                    <td>@ViewBag.Usuario.Email</td>
+                </tr>
+                <tr>
+                    <th scope="row">Nacionalidad</th>
+                    <td>@ViewBag.Usuario.Nacionalidad</td>
+                </tr>
+                @if (ViewBag.Usuario is ClientePremium)
+                {
+                    var p = ViewBag.Usuario as ClientePremium;
+                    <tr>
+                        <th scope="row">Puntos</th>
+                        <td>@p.Puntos</td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+}

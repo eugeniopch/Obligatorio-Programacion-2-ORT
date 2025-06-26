@@ -40,6 +40,11 @@ namespace Dominio
             get { return _rutas; }
         }
 
+        public List<Pasaje> Pasajes
+        {
+            get { return _pasajes; }
+        }
+
         private Sistema()
         {
             PrecargarAeropuertos();
@@ -260,13 +265,20 @@ namespace Dominio
             Cliente cliente = ObtenerClientePorDoc(documento);
             if (cliente == null) throw new Exception($"No se encontró un cliente con el documento {documento}");
 
-            //validación de vuelo
-            if (!vuelo.Frecuencia.Contains(fechaVuelo.DayOfWeek)) throw new Exception("La fecha ingresada no coincide con los días disponibles para este vuelo");
+            if (!vuelo.Frecuencia.Contains(fechaVuelo.DayOfWeek))
+                throw new Exception("La fecha ingresada no coincide con los días disponibles para este vuelo");
+
+            if (vuelo.CostoPorAsiento < 0) vuelo.CalcularCostoPorAsiento();
 
             Pasaje pasaje = new Pasaje(vuelo, fechaVuelo, cliente, equipaje, 0);
+            pasaje.CalculoDePrecio();
+            pasaje.Validar();
+
             if (_pasajes.Contains(pasaje)) throw new Exception("Ya existe un pasaje con ese id");
+
             _pasajes.Add(pasaje);
         }
+
 
         public Aeropuerto ObtenerAeropuertoPorId(string codAeropuerto)
         {
@@ -340,6 +352,18 @@ namespace Dominio
             return null;
         }
 
+        public Cliente ObtenerClientePorEmail(string email)
+        {
+            foreach (Usuario u in _usuarios)
+            {
+                if (u is Cliente c && c.Email == email)
+                {
+                    return c;
+                }
+            }
+            return null;
+        }
+
         public List<Vuelo> ObtenerVuelosPorCodigoAeropuerto(string codigo)
         {
             List<Vuelo> resultado = new List<Vuelo>();
@@ -384,6 +408,33 @@ namespace Dominio
             }
             return listadoPasajes;
         }
+
+        public List<Pasaje> ObtenerPasajesDeCliente(string email)
+        {
+            List<Pasaje> lista = new List<Pasaje>();
+
+            foreach (Pasaje p in _pasajes)
+            {
+                if (p.Cliente != null && p.Cliente.Email == email)
+                {
+                    lista.Add(p);
+                }
+            }
+
+            return lista;
+        }
+
+        public List<Cliente> ObtenerClientesOrdenadosPorDocumento()
+        {
+            List<Cliente> lista = new List<Cliente>();
+
+            foreach (Usuario u in _usuarios)
+            if (u is Cliente c) lista.Add(c);
+
+            lista.Sort();
+            return lista;
+        }
+
 
         public Usuario Login(string email, string pass) 
         {

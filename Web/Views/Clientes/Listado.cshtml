@@ -1,0 +1,53 @@
+﻿@using Dominio;
+
+@{
+    ViewData["Title"] = "Listado";
+}
+
+<h1 class="mb-4">Listado de Clientes</h1>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Documento</th>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Nacionalidad</th>
+            <th>Tipo</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var cliente in ViewBag.Clientes)
+        {
+            <tr>
+                <td>@cliente.Documento</td>
+                <td>@cliente.Nombre</td>
+                <td>@cliente.Email</td>
+                <td>@cliente.Nacionalidad</td>
+                <td>@(cliente is ClientePremium ? "Premium" : "Ocasional")</td>
+
+                <td>
+                    @if (cliente is ClientePremium cp)
+                    {
+                        <form method="post" action="/clientes/ModificarPuntos">
+                            <input type="hidden" name="documento" value="@cp.Documento" />
+                            <input type="number" name="puntos" value="@cp.Puntos" class="form-control mb-1" />
+                            <button type="submit" class="btn btn-sm btn-primary">Actualizar</button>
+                        </form>
+                    }
+                    else if (cliente is ClienteOcasional co)
+                    {
+                        <form method="post" action="/clientes/CambiarElegibilidad">
+                            <input type="hidden" name="documento" value="@co.Documento" />
+                            <span>@(co.EsElegible ? "Elegible" : "No elegible")</span>
+                            <button type="submit" class="btn btn-sm btn-warning ms-2">Cambiar</button>
+                        </form>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

@@ -1,0 +1,60 @@
+﻿@using Dominio;
+
+@{
+    ViewData["Title"] = "Listado";
+}
+
+@{
+    var pasajes = ViewBag.Listado as List<Pasaje>;
+    bool esAdmin = (ViewBag.Rol == "Admin");
+}
+
+<h1 class="h3 mb-4">Listado de pasajes</h1>
+
+@if (pasajes == null || pasajes.Count == 0)
+{
+    <div class="alert alert-info">No hay pasajes para mostrar.</div>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                @if (esAdmin)
+                {
+                    <th>ID</th>
+                }
+                <th>N.º vuelo</th>
+                <th>Fecha</th>
+
+                @if (esAdmin)
+                {
+                    <th>Cliente</th>
+                }
+                <th>Precio</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (Pasaje p in pasajes)
+            {
+                <tr>
+                    @if (esAdmin)
+                    {
+                        <td>@p.Id</td>
+                    }
+                    <td>@p.Vuelo.NumVuelo</td>
+                    <td>@p.FechaVuelo.ToShortDateString()</td>
+
+                    @if (esAdmin)
+                    {
+                        <td>@(p.Cliente != null ? p.Cliente.Nombre : "-")</td>
+                    }
+                    <td>@p.Precio</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+

@@ -7,7 +7,7 @@ using Dominio.Interfaces;
 
 namespace Dominio
 {
-    public class Pasaje : IValidable
+    public class Pasaje : IValidable, IComparable<Pasaje>
     {
         private int _id;
         private static int s_ultimoId = 1;
@@ -16,6 +16,8 @@ namespace Dominio
         public Cliente Cliente { get; set; }
         public Equipaje Equipaje { get; set; }
         public double Precio { get; set; }
+
+        public int Id {  get { return _id; } }
 
         public Pasaje() 
         {
@@ -32,8 +34,34 @@ namespace Dominio
             Precio = precio;
         }
 
-        //Método para calcular el precio del pasaje
-        public void CalculoDePrecio() {}
+        public void CalculoDePrecio()
+        {
+            if (Vuelo == null || Cliente == null) throw new Exception("No se puede calcular el precio sin vuelo ni cliente");
+
+            double costoBase = Vuelo.CostoPorAsiento;
+            double margenGanancia = 0.25;
+            double adicionalEquipaje = 0;
+
+            if (Cliente is ClienteOcasional)
+            {
+                if (Equipaje == Equipaje.CABINA)
+                    adicionalEquipaje = 0.10;
+                else if (Equipaje == Equipaje.BODEGA)
+                    adicionalEquipaje = 0.20;
+            }
+            else if (Cliente is ClientePremium)
+            {
+                if (Equipaje == Equipaje.BODEGA)
+                    adicionalEquipaje = 0.05;
+            }
+
+            double porcentajeTotal = margenGanancia + adicionalEquipaje;
+            double subtotal = costoBase * (1 + porcentajeTotal);
+            double tasas = Vuelo.Ruta.AeropuertoSalida.CostoOperacion + Vuelo.Ruta.AeropuertoLlegada.CostoOperacion;
+
+            Precio = Math.Round(subtotal + tasas, 2);
+        }
+
 
         public void Validar()
         {
@@ -56,6 +84,12 @@ namespace Dominio
         {
             Pasaje p = obj as Pasaje;
             return p != null && p._id == this._id;
+        }
+
+        public int CompareTo(Pasaje other)
+        {
+            if (other == null) return -1;
+            return other.Precio.CompareTo(this.Precio);
         }
     }
 

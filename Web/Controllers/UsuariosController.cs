@@ -74,5 +74,12 @@ namespace Web.Controllers
             return View("Registro");
         }
 
+        public IActionResult Perfil()
+        {
+            if (HttpContext.Session.GetString("email") == null) return View("NoAutorizado");
+            ViewBag.Usuario = Sistema.Instancia.ObtenerClientePorEmail(HttpContext.Session.GetString("email"));
+            return View();
+        }
+
     }
 }

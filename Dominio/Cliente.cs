@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    public abstract class Cliente : Usuario
+    public abstract class Cliente : Usuario, IComparable<Cliente>
     {
         protected string _documento;
         protected string _nombreCompleto;
@@ -20,6 +20,11 @@ namespace Dominio
         public string Nombre
         {
             get { return _nombreCompleto; }
+        }
+
+        public string Nacionalidad
+        {
+            get { return _nacionalidad; }
         }
 
         public Cliente(string email, string password, string documento, string nombreCompleto, string nacionalidad) : base(email, password)
@@ -40,6 +45,12 @@ namespace Dominio
         public override string Rol()
         {
             return "Cliente";
+        }
+
+        public int CompareTo(Cliente otro)
+        {
+            if (otro == null) return -1;
+            return this.Documento.CompareTo(otro.Documento);
         }
     }
 
